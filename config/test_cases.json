@@ -3,35 +3,35 @@
     "id": "TC01",
     "type": "direct_query",
     "question": "Chào bạn, bạn có thể giới thiệu quy chế học vụ cơ bản của Đại học VinUni không?",
-    "expected_behavior": "Chatbot trả lời trực tiếp từ System Prompt, không cần gọi bất kỳ Tool nào.",
+    "expected_behavior": "Agent trả lời trực tiếp từ System Prompt, không cần gọi Tool.",
     "complexity": "Low"
   },
   {
     "id": "TC02",
     "type": "single_tool_query",
     "question": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
-    "expected_behavior": "Agent nhận diện nhu cầu tra cứu, tự động phát sinh Tool Call 'academic_query' với mã SV2026001.",
+    "expected_behavior": "Agent nhận diện nhu cầu tra cứu và gọi Tool 'academic_query' với student_id là SV2026001.",
     "complexity": "Medium"
   },
-{
-  "id": "TC03",
-  "type": "appointment_booking",
-  "question": "Ứng viên Nguyễn Văn A (mã hồ sơ UV2026015) đã đạt yêu cầu vòng CV cho vị trí Backend Developer, hãy đặt lịch phỏng vấn cho ứng viên này vào chiều thứ Ba tuần sau.",
-  "expected_behavior": "Agent tự động phát sinh Tool Call 'schedule_interview' với đúng mã ứng viên, vị trí ứng tuyển và khung thời gian yêu cầu.",
-  "complexity": "Medium"
-},
-{
-  "id": "TC04",
-  "type": "multi_step_reasoning",
-  "question": "Hãy sàng lọc CV của ứng viên UV2026015 theo tiêu chí tuyển dụng vị trí Backend Developer, nếu đạt thì tiến hành đặt lịch phỏng vấn với người phỏng vấn phụ trách vị trí này.",
-  "expected_behavior": "Agent thực hiện chuỗi suy luận ReAct: (1) gọi Tool 'get_job_criteria' lấy tiêu chí vị trí, (2) gọi Tool 'screen_cv' đối chiếu và chấm điểm hồ sơ ứng viên, (3) nếu đạt ngưỡng, gọi Tool 'schedule_interview' để đặt lịch với đúng người phỏng vấn phụ trách.",
-  "complexity": "High"
-},
-{
-  "id": "TC05",
-  "type": "edge_case_handling",
-  "question": "Hãy tra cứu và sàng lọc hồ sơ ứng viên có mã UV9999999.",
-  "expected_behavior": "Agent nhận kết quả NOT_FOUND từ Tool 'screen_cv', phản hồi lịch sự thông báo không tìm thấy hồ sơ ứng viên và không tự bịa ra thông tin ứng viên hay kết quả sàng lọc.",
-  "complexity": "Medium"
-}
+  {
+    "id": "TC03",
+    "type": "appointment_booking",
+    "question": "Hãy đặt lịch hẹn tư vấn học vụ cho sinh viên SV2026001 vào lúc 14:00 ngày 15/09/2026 với PGS.TS Nguyễn Văn A.",
+    "expected_behavior": "Agent gọi Tool 'schedule_appointment' với student_id, datetime_str và advisor_name phù hợp; MCP Server trả về thông báo đặt lịch thành công.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC04",
+    "type": "tool_selection",
+    "question": "Tôi muốn biết GPA, lớp học và cố vấn học tập của sinh viên SV2026002.",
+    "expected_behavior": "Agent nhận diện đây là dữ liệu học vụ cá nhân, gọi Tool 'academic_query' với student_id là SV2026002, sau đó tổng hợp GPA, lớp và cố vấn từ Observation.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC05",
+    "type": "edge_case_handling",
+    "question": "Hãy tra cứu thông tin học vụ của sinh viên SV9999999.",
+    "expected_behavior": "Agent gọi Tool 'academic_query'. Khi Tool trả về status 'NOT_FOUND', Agent thông báo lịch sự rằng không tìm thấy dữ liệu và không tự bịa thông tin sinh viên.",
+    "complexity": "Medium"
+  }
 ]

@@ -41,6 +41,20 @@ cp config/test_cases.example.json config/test_cases.json
 python src/app.py --all
 ```
 
+### Demo luồng ReAct chọn Tool
+```bash
+python src/app.py --demo
+```
+
+Demo sẽ in các bước quan sát được: **Reasoning Summary → Action (Tool) → Observation (MCP) → Final Answer**. Đây là tóm tắt hành động cấp cao, không phải raw chain-of-thought của mô hình.
+
+### ReAct Demo Web UI
+```bash
+python src/app.py --web
+```
+
+Trình duyệt sẽ mở tại `http://127.0.0.1:8080`. Giao diện cho phép nhập câu hỏi, chọn ví dụ nhanh và quan sát timeline của Reasoning Summary → Tool Selected → MCP Observation → Final Answer.
+
 **Kỳ vọng Output màn hình:**
 ```text
 ✅ [MOCK OFFLINE MODE PASS]: Môi trường đã sẵn sàng! 

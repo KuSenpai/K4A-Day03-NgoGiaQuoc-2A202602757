@@ -24,6 +24,7 @@ from prompts import (
     MAX_ITERATIONS
 )
 from providers import get_llm_provider
+from demo_ui import start_demo_server
 
 load_dotenv()
 
@@ -82,7 +83,7 @@ def run_react_agent(user_query: str, provider, mcp_server: MCPAcademicServer) ->
         latency_ms = round((time.time() - step_start_time) * 1000, 2)
         
         thought = llm_response.get("thought", "Đang suy luận...")
-        print(f"🧠 [Thought]: {thought}")
+        print(f"🧠 [Reasoning Summary]: {thought}")
         
         # Trường hợp 1: LLM quyết định trả lời bằng văn bản trực tiếp
         if llm_response.get("type") == "text":
@@ -146,7 +147,7 @@ def run_react_agent(user_query: str, provider, mcp_server: MCPAcademicServer) ->
             })
             
             # Kết thúc vòng lặp sau khi hoàn tất Observation và xuất Final Answer
-            print(f"🧠 [Thought]: Đã nhận được dữ liệu từ MCP Server. Tổng hợp kết quả phản hồi.")
+            print(f"🧠 [Reasoning Summary]: Đã nhận được dữ liệu từ MCP Server. Tổng hợp kết quả phản hồi.")
             print(f"🏁 [Final Answer]: {final_answer}")
             
             trace_logs.append({
@@ -176,7 +177,16 @@ if __name__ == "__main__":
     tests = load_test_cases()
     print(f"✅ Đã tải thành công {len(tests)} Test Cases thử nghiệm.\n")
     
-    if "--interactive" in sys.argv:
+    if "--web" in sys.argv:
+        start_demo_server()
+    elif "--demo" in sys.argv:
+        demo_query = "Hãy tra cứu thông tin học vụ của sinh viên SV2026001"
+        #ಂತ್ರ to=functions.Edit  北京赛车群d天天 ашәjson}
+        print("🎬 [REACT DEMO MODE] Minh họa Agent chọn Tool qua MCP Server:")
+        print("   Luồng quan sát được: Reasoning Summary → Action → Observation → Final Answer\n")
+        logs = run_react_agent(demo_query, provider, mcp_server)
+        save_waterfall_trace(logs)
+    elif "--interactive" in sys.argv:
         print("🎮 [INTERACTIVE MODE] Trò chuyện trực tiếp với ReAct Agent:")
         print("💡 Gợi ý câu hỏi thử nghiệm:")
         print("   - Câu hỏi chung: 'Quy chế học vụ VinUni yêu cầu bao nhiêu tín chỉ?'")
@@ -223,8 +233,10 @@ if __name__ == "__main__":
     else:
         # Chế độ mặc định khi chỉ gõ 'python src/app.py'
         print("ℹ️ HƯỚNG DẪN SỬ DỤNG CHƯƠNG TRÌNH:")
-        print("  1. Chat trực tiếp liên tục:   python src/app.py --interactive")
-        print("  2. Chạy toàn bộ Test Cases:    python src/app.py --all\n")
+        print("  1. Mở ReAct Demo Web UI:       python src/app.py --web")
+        print("  2. Xem demo Agent chọn Tool:   python src/app.py --demo")
+        print("  3. Chat trực tiếp liên tục:    python src/app.py --interactive")
+        print("  4. Chạy toàn bộ Test Cases:    python src/app.py --all\n")
         
         sample_query = tests[1]["question"]
         print(f"--- 🏁 DEMO CHẠY THỬ 1 TEST CASE MẪU (TC02: Tra cứu học vụ) ---")
