@@ -5,6 +5,3 @@ python-dotenv
 requests
 pydantic
 rich
-fastapi
-uvicorn[standard]
-passlib[bcrypt]

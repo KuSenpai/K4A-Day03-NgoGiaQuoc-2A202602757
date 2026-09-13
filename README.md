@@ -56,41 +56,6 @@ python src/app.py --all
 
 ---
 
-## 🌐 Agentic AI Web Prototype — User/Admin Mode
-
-Prototype web cung cấp hai chế độ tách biệt ở phía backend:
-
-- **User Mode** (`/`): gửi yêu cầu, theo dõi tiến độ tổng quát và nhận kết quả. API công khai không trả trace, tên tool, input/output tool, prompt nội bộ hoặc dữ liệu suy luận.
-- **Admin Mode** (`/login` → `/admin`): sau khi backend xác thực, quản trị viên có thể xem **Agent Execution Trace** (tóm tắt hành động quan sát được), Tool Execution Monitor và Execution Logs trong bộ nhớ.
-
-> Trace dành cho Admin không phải raw chain-of-thought: hệ thống chỉ tạo các sự kiện an toàn như task received, planning, tool selected/executed, observation summary, validation và final response.
-
-### Chạy web prototype
-
-```bash
-pip install -r requirements.txt
-copy .env.example .env
-```
-
-Tạo password hash và session secret, sau đó thêm **giá trị sinh ra** vào `.env` (không đưa mật khẩu hoặc hash thật vào source code):
-
-```bash
-python -c "from passlib.context import CryptContext; print(CryptContext(schemes=['bcrypt']).hash('your-admin-password'))"
-python -c "import secrets; print(secrets.token_urlsafe(32))"
-```
-
-Gán lần lượt vào `ADMIN_PASSWORD_HASH` và `SESSION_SECRET`, rồi khởi chạy:
-
-```bash
-uvicorn src.web_app:app --reload
-```
-
-Mở `http://127.0.0.1:8000`. User Mode sẽ mô phỏng các trạng thái phân tích tracking/ID Switch theo thời gian thực. Nút **⚙ Admin** mở trang đăng nhập; chỉ session admin xác thực mới được truy cập `/admin/*` và `/api/admin/*`.
-
-> ⚠️ Bảo mật: không lưu API key thật trong repository hoặc tài liệu. Nếu một key từng bị dán vào `.env` hay nơi có thể bị chia sẻ, hãy thu hồi (revoke) và tạo key mới ngay.
-
----
-
 ## 🎯 2. BỨC TRANH TỔNG THỂ & MỤC TIÊU DÀI HẠN (NORTH STAR GOAL)
 
 Mục tiêu cốt lõi của Bài Lab này là giúp học viên tự tay phát triển một **Trợ lý Tác tử ReAct (ReAct Agent)** hoàn chỉnh.
