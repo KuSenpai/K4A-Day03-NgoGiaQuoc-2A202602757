@@ -1,8 +1,8 @@
 # 📊 BÁO CÁO THU HOẠCH NGHIỆM THU BÀI LAB 3 (BƯỚC 3 — SUBMISSION ARTIFACT)
 
-> **Họ và Tên Học viên:** [Điền Họ và Tên]  
-> **Mã Sinh Viên / Mã Học viên:** [Điền MSSV]  
-> **Chủ đề Lựa chọn:** [Điền tên chủ đề đã chọn từ docs/DANH_SACH_DE_TAI.md hoặc Đề tài Mở]  
+> **Họ và Tên Học viên:** [Ngô Gia Quốc]  
+> **Mã Sinh Viên / Mã Học viên:** [2A202602757]  
+> **Chủ đề Lựa chọn:** [Trợ lý Tuyển dụng & Sàng lọc CV]  
 
 ---
 
@@ -10,11 +10,11 @@
 
 | Tiêu chí Đánh giá | Mức độ (1 - 5) | Giải trình chi tiết lý do chọn điểm |
 | :--- | :---: | :--- |
-| **1. Multi-step Reasoning** | / 5 | Bài toán có yêu cầu chia nhỏ nhiều bước suy luận nối tiếp nhau không? |
-| **2. Tool Interaction** | / 5 | Hệ thống có cần kết nối với MCP Server / Cơ sở dữ liệu bên ngoài không? |
-| **3. Dynamic Decision** | / 5 | Bước tiếp theo có phụ thuộc vào kết quả quan sát bước trước không? |
-| **4. Long Horizon Goal** | / 5 | Hệ thống có phải giữ mục tiêu xuyên suốt qua nhiều lượt xử lý không? |
-| **TỔNG ĐIỂM AGENTIC FIT** | **/ 20** | *Nếu tổng điểm > 12/20: Bài toán rất phù hợp triển khai Agentic System.* |
+| **1. Multi-step Reasoning** | 4 / 5 | Quy trình gồm chuỗi bước nối tiếp: (1) trích xuất thông tin từ CV (họ tên, kỹ năng, kinh nghiệm, học vấn) → (2) đối chiếu với tiêu chí JD của vị trí tuyển → (3) chấm điểm / xếp hạng mức độ phù hợp → (4) ra quyết định (đạt / loại / cần xem xét thêm) → (5) nếu đạt, tra lịch rảnh của người phỏng vấn → (6) soạn và gửi thông báo lịch phỏng vấn cho ứng viên.|
+| **2. Tool Interaction** | 5 / 5 | Hệ thống cần phải gọi các công cụ/nguồn bên ngoài khác nhau: (a) parser đọc file CV (PDF/DOCX), (b) cơ sở dữ liệu/API lưu tiêu chí tuyển dụng theo từng vị trí (JD), (c) hệ thống lịch (Google Calendar/Outlook MCP) để kiểm tra slot trống của người phỏng vấn, (d) dịch vụ email/SMS để gửi thông báo.|
+| **3. Dynamic Decision** | 4 / 5 | Bước tiếp theo phụ thuộc chặt vào kết quả quan sát trước đó: nếu CV không đạt điểm sàn → dừng và gửi thư từ chối (rẽ nhánh sớm); nếu đạt → tiếp tục tra lịch; nếu người phỏng vấn không có slot trống trong tuần → cần tìm phương án thay thế (đổi người phỏng vấn/đổi ngày) trước khi gửi thông báo. |
+| **4. Long Horizon Goal** | 4 / 5 | Hệ thống phải duy trì mục tiêu xuyên suốt cho từng vị trí tuyển dụng qua nhiều lượt xử lý — có thể kéo dài từ lúc nhận CV, sàng lọc hàng loạt ứng viên, đến khi hoàn tất lịch phỏng vấn toàn bộ đợt tuyển. Cần "nhớ" trạng thái từng ứng viên (đã lọc, đang chờ lịch, đã gửi thông báo) trong suốt vòng đời của một đợt tuyển dụng. |
+| **TỔNG ĐIỂM AGENTIC FIT** | **17 / 20** | *17/20 > 12/20 → Bài toán RẤT PHÙ HỢP để triển khai như một Agentic System.* |
 
 ---
 
@@ -51,9 +51,9 @@ Dán 1 đoạn trích xuất log tiêu biểu từ file `docs/trace_waterfall.js
 ## 3. TỔNG KẾT KẾT QUẢ NGHIỆM THU & NỘP BÀI
 
 - [ ] Đã điền API Key thật trong `.env` và xác nhận Agent chạy mượt mà trên LLM API thật (Gemini/OpenAI).
-- **Tổng số Test Cases đã chạy thành công:** ___ / 5 test cases.
-- **Số lượt gọi Tool qua MCP Server chính xác:** ___ lượt.
-- **Kết quả đẩy Repo nộp bài:** [ ] Đã Commit và Push mã nguồn thành công lên GitHub cá nhân.
+- **Tổng số Test Cases đã chạy thành công:** 5 / 5 test cases.
+- **Số lượt gọi Tool qua MCP Server chính xác:** 2 lượt.
+- **Kết quả đẩy Repo nộp bài:** [v] Đã Commit và Push mã nguồn thành công lên GitHub cá nhân.
 
 ---
 

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "TC01",
+    "type": "direct_query",
+    "question": "Chào bạn, bạn có thể giới thiệu quy chế học vụ cơ bản của Đại học VinUni không?",
+    "expected_behavior": "Chatbot trả lời trực tiếp từ System Prompt, không cần gọi bất kỳ Tool nào.",
+    "complexity": "Low"
+  },
+  {
+    "id": "TC02",
+    "type": "single_tool_query",
+    "question": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
+    "expected_behavior": "Agent nhận diện nhu cầu tra cứu, tự động phát sinh Tool Call 'academic_query' với mã SV2026001.",
+    "complexity": "Medium"
+  },
+{
+  "id": "TC03",
+  "type": "appointment_booking",
+  "question": "Ứng viên Nguyễn Văn A (mã hồ sơ UV2026015) đã đạt yêu cầu vòng CV cho vị trí Backend Developer, hãy đặt lịch phỏng vấn cho ứng viên này vào chiều thứ Ba tuần sau.",
+  "expected_behavior": "Agent tự động phát sinh Tool Call 'schedule_interview' với đúng mã ứng viên, vị trí ứng tuyển và khung thời gian yêu cầu.",
+  "complexity": "Medium"
+},
+{
+  "id": "TC04",
+  "type": "multi_step_reasoning",
+  "question": "Hãy sàng lọc CV của ứng viên UV2026015 theo tiêu chí tuyển dụng vị trí Backend Developer, nếu đạt thì tiến hành đặt lịch phỏng vấn với người phỏng vấn phụ trách vị trí này.",
+  "expected_behavior": "Agent thực hiện chuỗi suy luận ReAct: (1) gọi Tool 'get_job_criteria' lấy tiêu chí vị trí, (2) gọi Tool 'screen_cv' đối chiếu và chấm điểm hồ sơ ứng viên, (3) nếu đạt ngưỡng, gọi Tool 'schedule_interview' để đặt lịch với đúng người phỏng vấn phụ trách.",
+  "complexity": "High"
+},
+{
+  "id": "TC05",
+  "type": "edge_case_handling",
+  "question": "Hãy tra cứu và sàng lọc hồ sơ ứng viên có mã UV9999999.",
+  "expected_behavior": "Agent nhận kết quả NOT_FOUND từ Tool 'screen_cv', phản hồi lịch sự thông báo không tìm thấy hồ sơ ứng viên và không tự bịa ra thông tin ứng viên hay kết quả sàng lọc.",
+  "complexity": "Medium"
+}
+]
